@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchApi, saveInfos, infos } from '../redux/actions';
+import { fetchApi } from '../redux/actions';
 import fetchApiFunc from '../helpers/fetchApiFunc';
 
 class WalletForm extends Component {
@@ -26,7 +26,7 @@ class WalletForm extends Component {
 
   handleClick = async () => {
     const response = await fetchApiFunc();
-    const { wallet: { expenses, totalField }, dispatch } = this.props;
+    const { wallet: { expenses }, dispatch } = this.props;
     const {
       value,
       description,
@@ -43,10 +43,10 @@ class WalletForm extends Component {
       tag: category,
       exchangeRates: await response,
     };
-    dispatch(saveInfos(infosObj));
-    const currencyAPI = response[currency].ask;
-    const total = (+value * +currencyAPI).toFixed(2);
-    dispatch(infos(+total + +totalField));
+    dispatch({
+      type: 'SAVE_INFOS',
+      expenses: infosObj,
+    });
     this.setState({
       value: '',
       description: '',
@@ -129,7 +129,6 @@ WalletForm.propTypes = {
   wallet: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string),
     expenses: PropTypes.arrayOf(PropTypes.shape()),
-    totalField: PropTypes.number,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };

@@ -7,6 +7,7 @@ export const INNITIAL_REQUEST = 'INNITIAL_REQUEST';
 export const PASS_REQUEST = 'PASS_REQUEST';
 export const ERROR_REQUEST = 'ERROR_REQUEST';
 export const SAVE_INFOS = 'SAVE_INFOS';
+export const DELETE_REQUEST = 'DELETE_REQUEST';
 
 export const login = (value) => ({
   type: LOGIN,

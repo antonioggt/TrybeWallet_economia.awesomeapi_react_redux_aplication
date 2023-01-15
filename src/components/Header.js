@@ -4,23 +4,22 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { email, totalField, isLoading } = this.props;
+    const { email, expenses, isLoading } = this.props;
+    let variavel = 0;
     return (
       <div>
         <p data-testid="email-field">
-          Email:
-          {' '}
-          { email }
+          { `Email: ${email}` }
         </p>
-        Despesa Total:
-        <p data-testid="total-field">
-          { totalField }
-        </p>
-        <p data-testid="header-currency-field">
-          Câmbio:
-          {' '}
-          BRL
-        </p>
+        {expenses.forEach((e) => {
+          const currencyH = e.currency;
+          const valueH = e.value;
+          const exchangeH = e.exchangeRates[currencyH].ask;
+          variavel += valueH * exchangeH;
+        })}
+        <h3>Despesa Total:</h3>
+        <p data-testid="total-field">{ variavel.toFixed(2) }</p>
+        <p data-testid="header-currency-field">BRL</p>
         {
           isLoading && <h1>Carregando, aguarde.</h1>
         }
@@ -31,13 +30,13 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  totalField: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  totalField: state.wallet.totalField,
+  expenses: state.wallet.expenses,
   isLoading: state.wallet.isLoading,
 });
 

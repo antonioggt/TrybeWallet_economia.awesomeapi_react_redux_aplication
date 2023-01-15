@@ -3,8 +3,8 @@ import {
   INNITIAL_REQUEST,
   PASS_REQUEST,
   ERROR_REQUEST,
-  INFOS,
   SAVE_INFOS,
+  DELETE_REQUEST,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -38,16 +38,16 @@ const wallet = (state = INITIAL_STATE, action) => {
       errorMessage: action.error.message || 'Erro',
     };
   }
-  case INFOS: {
-    return {
-      ...state,
-      totalField: action.payload.value,
-    };
-  }
   case SAVE_INFOS: {
     return {
       ...state,
-      expenses: [...state.expenses, action.payload.expenses],
+      expenses: [...state.expenses, action.expenses],
+    };
+  }
+  case DELETE_REQUEST: {
+    return {
+      ...state,
+      expenses: state.expenses.filter((e) => +e.id !== action.id),
     };
   }
   default:

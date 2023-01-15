@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Table extends Component {
+  handleDeleteBtn = (id) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'DELETE_REQUEST',
+      id,
+    });
+  };
+
   render() {
     const { wallet: { expenses } } = this.props;
     return (
@@ -33,6 +41,15 @@ class Table extends Component {
               <td>{ (+e.exchangeRates[e.currency].ask).toFixed(2) }</td>
               <td>{ (+e.exchangeRates[e.currency].ask * +e.value).toFixed(2) }</td>
               <td>Reais</td>
+              <td>
+                <button
+                  data-testid="delete-btn"
+                  type="button"
+                  onClick={ () => this.handleDeleteBtn(e.id) }
+                >
+                  Editar/Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -42,6 +59,7 @@ class Table extends Component {
 }
 
 Table.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   wallet: PropTypes.shape({
     expenses: PropTypes.arrayOf(PropTypes.shape({
     })),
