@@ -27,18 +27,13 @@ Este projeto foi configurado e desenvolvido com as ferramentas e suporte forneci
 
 Para instalar e rodar o Trybe Wallet localmente, siga os passos abaixo:
 
-1. Clone o repositório:
+1. Clone o repositório: git clone URL_DO_REPOSITORIO
 
-git clone URL_DO_REPOSITORIO
+2. Entre no diretório do projeto: cd NOME_DO_DIRETORIO
 
-2. Entre no diretório do projeto:
-cd NOME_DO_DIRETORIO
+3. Instale as dependências: npm install
 
-3. Instale as dependências:
-npm install
-
-4. Execute a aplicação:
-npm start
+4. Execute a aplicação: npm start
 
 ## Uso
 Após iniciar a aplicação, você pode começar a adicionar despesas, especificando detalhes como valor, descrição, moeda, método de pagamento e categoria. As despesas adicionadas são exibidas em uma tabela, onde podem ser editadas ou excluídas conforme necessário.
