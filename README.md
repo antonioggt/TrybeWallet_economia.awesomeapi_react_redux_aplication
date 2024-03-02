@@ -28,7 +28,7 @@ Este projeto foi configurado e desenvolvido com as ferramentas e suporte forneci
 Para instalar e rodar o Trybe Wallet localmente, siga os passos abaixo:
 
 1. Clone o repositório:
-```bash
+
 git clone URL_DO_REPOSITORIO
 
 2. Entre no diretório do projeto:
